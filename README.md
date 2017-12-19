@@ -3,3 +3,6 @@
 
 
 Polynomial regression approximation, OLS
+
+https://en.wikipedia.org/wiki/Givens_rotation
+https://en.wikipedia.org/wiki/QR_decomposition
