@@ -33,7 +33,24 @@ SCENARIO("approx test", "[test]") {
 
 	REQUIRE(s1 == s2);
 
+	
+	
 	apY = nma::polyval(coefs, X);
-	REQUIRE(_apY == apY);
+
+	std::ostringstream oss3, oss4;
+	std::copy(_apY.begin(), _apY.end() - 1,
+		std::ostream_iterator<double>(oss3, ","));
+
+	std::copy(apY.begin(), apY.end() - 1,
+		std::ostream_iterator<double>(oss4, ","));
+
+	oss3 << _apY.back();
+	oss4 << apY.back();
+
+	std::string s3 = oss1.str(),
+		s4 = oss2.str();
+
+
+	REQUIRE(s3 == s4);
 
 }
