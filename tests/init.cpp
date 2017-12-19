@@ -1,6 +1,10 @@
 #include <approx.hpp>
 #include <vector>
 #include <iostream>
+#include <string>
+#include <algorithm>
+#include <sstream>
+#include <iterator>
 #include <catch.hpp>
 
 SCENARIO("approx test", "[test]") {
@@ -13,10 +17,21 @@ SCENARIO("approx test", "[test]") {
 		_apY = { 2.9999999998453211, 4.5000000010598793, 1.6999999978024625, 0.70000000162359388, -1.0000000004023093, -1.9999999999242846, 3.9999999999945430 };
 
 	coefs = nma::polyfit(X, Y, 6);
-	std::cout << coefs.size() << std::endl;
-	std::cout << _coefs.size() << std::endl;
-	std::cout << (_coefs == coefs) << std::endl;
-	REQUIRE(1 == 1);
+	
+	std::ostringstream oss1, oss2;
+	std::copy(_coefs.begin(), _coefs.end() - 1,
+		std::ostream_iterator<double>(oss1, ","));
+
+	std::copy(coefs.begin(), coefs.end() - 1,
+		std::ostream_iterator<double>(oss2, ","));
+
+	oss1 << _coefs.back();
+	oss2 << coefs.back();
+
+	std::string s1 = oss1.str(),
+		s2 = oss2.str();
+
+	REQUIRE(s1 == s2);
 
 	apY = nma::polyval(coefs, X);
 	REQUIRE(_apY == apY);
