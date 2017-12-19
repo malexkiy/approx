@@ -47,8 +47,8 @@ SCENARIO("approx test", "[test]") {
 	oss3 << _apY.back();
 	oss4 << apY.back();
 
-	std::string s3 = oss1.str(),
-		s4 = oss2.str();
+	std::string s3 = oss3.str(),
+		s4 = oss4.str();
 
 
 	REQUIRE(s3 == s4);
